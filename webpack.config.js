@@ -7,6 +7,9 @@ const clientConfig = {
     filename: "client.bundle.js",
     path: path.resolve(__dirname, "build"),
   },
+  resolve: {
+    extensions: [".js", ".jsx"],
+  },
   module: {
     rules: [
       {
@@ -23,6 +26,9 @@ const serverConfig = {
   output: {
     filename: "server.bundle.js",
     path: path.resolve(__dirname, "build"),
+  },
+  resolve: {
+    extensions: [".js", ".jsx"],
   },
   module: {
     rules: [
