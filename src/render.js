@@ -1,14 +1,25 @@
 import { App } from "../client/app.jsx";
 import React from "react";
 import { renderToPipeableStream } from "react-dom/server";
-import { StaticRouter } from "react-router-dom/server";
+import {
+  StaticRouter,
+  StaticRouterProvider,
+  createStaticHandler,
+  createStaticRouter,
+} from "react-router-dom/server";
 import { routes } from "./routes.js";
+import { createFetchRequest } from "./request.js";
 
-export const render = (req, res) => {
+const handler = createStaticHandler(routes);
+
+export const render = async (req, res) => {
+  let fetchRequest = createFetchRequest(req);
+  let context = await handler.query(fetchRequest);
+
+  let router = createStaticRouter(handler.dataRoutes, context);
+
   const stream = renderToPipeableStream(
-    <StaticRouter location={req.url}>
-      <App />
-    </StaticRouter>,
+    <StaticRouterProvider router={router} context={context} />,
     {
       bootstrapScripts: ["client.bundle.js"],
       onShellReady() {
