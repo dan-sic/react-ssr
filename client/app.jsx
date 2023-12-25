@@ -1,4 +1,6 @@
 import { Suspense, lazy } from "react";
+import { Route, Routes } from "react-router-dom";
+import About from "./about.jsx";
 import { Html } from "./html";
 import { Sidebar } from "./sidebar";
 
@@ -11,7 +13,10 @@ export const App = () => {
     <Html>
       <Sidebar />
       <Suspense fallback="Loading...">
-        <Main />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
       </Suspense>
     </Html>
   );
