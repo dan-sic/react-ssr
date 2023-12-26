@@ -7,6 +7,7 @@ import { Outlet } from "react-router-dom";
 
 export const App = () => {
   return (
+    // html returned on each page
     <Html>
       <Sidebar />
       <Suspense fallback="Loading...">

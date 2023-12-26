@@ -4,9 +4,10 @@ const { render } = require("./render");
 
 const app = express();
 
+// point where express should look for client.bundle.js
 app.use(express.static(path.join(__dirname, "..", "build")));
-app.use(express.static(path.join(__dirname, "..", "assets")));
 
+// routing handeled by react-router
 app.get("/*", (req, res) => {
   render(req, res);
 });
